@@ -14,8 +14,6 @@ const styles = {
 const ConversationList = (props) => {
   const hasConversations = props.conversations.length > 0;
 
-  console.log(props.users);
-
   return (
     <div style={styles.container}>
       <NewConversationForm

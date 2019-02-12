@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Empty, List } from 'antd';
 
+import Header from '../../../../components/Header/header.component';
 import Message from '../message-bubble/message-bubble.component';
 import MessageForm from './message-form.component';
 
@@ -43,10 +44,13 @@ const startSequence = (previous, current) => {
   return true;
 };
 
+const getReceiver = (conversation, user) =>  conversation.users.find(u => u.id !== user.id) || user;
+
 const belongsToCurrentUser = (message, user) => message.user_id === user.id;
 
 const renderMessages = (conversation, messages, user) => (
   <div className="message-list-content">
+    <Header title={getReceiver(conversation, user).profile.personal_datum.full_name} />
     <List
       style={{ flexGrow: 1 }}
       dataSource={messages}
@@ -80,7 +84,11 @@ const MessagesList = ({ conversation, user }) => {
     <div className="message-list-container">
       {hasMessages && renderMessages(conversation, messages, user)}
 
-      {!hasMessages && <Empty description="Ainda não há nenhuma mensagem" />}
+      {!hasMessages && (
+        <div className="empty-container">
+          <Empty description="Ainda não há nenhuma mensagem" />
+        </div>
+      )}
       <MessageForm conversationId={conversation.id} user={user} />
     </div>
   );
