@@ -33,13 +33,21 @@ const withLifecycle = lifecycle({
 });
 
 const handleCreateNewConversation = props => async (userId) =>  {
-  try {
-    props.showPageLoader();
-    await WebAPI.postNewConversation({ receiver_id: userId });
-  } catch (e) {
-    console.log(e);
-  } finally {
-    props.hidePageLoader();
+  const conversation = props.conversations.find(conversation =>
+    conversation.users.find(user => user.id == userId)
+  );
+
+  if (conversation) {
+      props.selectConversation(conversation.id);
+  } else {
+    try {
+      props.showPageLoader();
+      await WebAPI.postNewConversation({ receiver_id: userId });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      props.hidePageLoader();
+    }
   }
 }
 

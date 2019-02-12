@@ -33,7 +33,7 @@ class NewMessageForm extends React.Component<Props, State> {
           .then(() => {
             form.resetFields();
           })
-          .catch(err => console.log(error));
+          .catch(error => console.log(error));
       }
     });
   };

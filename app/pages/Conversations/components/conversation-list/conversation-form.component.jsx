@@ -15,9 +15,11 @@ type User = {
 
 type Props = {
   users: Array<User>,
+  userList: Array<User>,
   handleOnSelect: Function,
   handleOnSearch: Function,
-  createConversation: Function
+  createConversation: Function,
+  setUserList: Function
 };
 
 const styles = {
