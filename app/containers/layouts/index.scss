@@ -1,0 +1,26 @@
+#default-layout .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#default-layout .trigger:hover {
+  color: #008081;
+}
+
+#default-layout .logo {
+  height: 125px;
+  background: #193b4a;
+  position: relative;
+  margin-bottom: 0;
+  color: white;
+}
+
+#page-layout {
+  height: 100% !important;
+  .ant-layout-content {
+    background-color: lavender;
+  }
+}
