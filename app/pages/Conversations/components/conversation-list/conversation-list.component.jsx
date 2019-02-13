@@ -1,9 +1,9 @@
 import React from 'react';
-import { List, Avatar, Empty } from 'antd';
-import { compose, lifecycle } from 'recompose';
+import { List, Divider, Empty } from 'antd';
 
 import ConversationListItem from './conversation-list-item.component';
 import NewConversationForm from './conversation-form.component';
+import CurrentUserDisplay from '../user-item/user-item.component';
 
 const styles = {
   container: {
@@ -16,9 +16,9 @@ const ConversationList = (props) => {
 
   return (
     <div style={styles.container}>
-      <NewConversationForm
-        users={props.users}
-        createConversation={props.createConversation}/>
+      <CurrentUserDisplay user={props.user} />
+      <Divider />
+      <NewConversationForm users={props.users} createConversation={props.createConversation} />
       {hasConversations && (
         <List
           itemLayout="horizontal"

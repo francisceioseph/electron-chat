@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AppConstants from '../constants';
 
 import { history, store } from '../store';
 import { clearCredentials } from '../pages/Login/login.actions';
@@ -60,7 +61,7 @@ export const GET_CHAT_USERS_URL = '/conversations/users';
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use((oldSettings) => {
     const settings = { ...oldSettings };
-    const cacheStr = localStorage.getItem('DOCTOR_ASSISTANT_AUTH_TOKEN');
+    const cacheStr = localStorage.getItem(AppConstants.AUTH_TOKEN_STORAGE_ID);
     const cache = cacheStr ? JSON.parse(cacheStr) : {};
 
     settings.headers.common.Authorization = cache.token;

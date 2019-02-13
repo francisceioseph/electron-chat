@@ -44,7 +44,7 @@ const startSequence = (previous, current) => {
   return true;
 };
 
-const getReceiver = (conversation, user) =>  conversation.users.find(u => u.id !== user.id) || user;
+const getReceiver = (conversation, user) => conversation.users.find(u => u.id !== user.id) || user;
 
 const belongsToCurrentUser = (message, user) => message.user_id === user.id;
 
