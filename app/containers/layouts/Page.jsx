@@ -11,6 +11,7 @@ import './index.scss';
 
 const { Content } = Layout;
 
+// eslint-disable-next-line react/prefer-stateless-function
 class PageLayout extends React.Component {
   render() {
     const { loading, component: Component, ...rest } = this.props; //eslint-disable-line

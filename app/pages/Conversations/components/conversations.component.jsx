@@ -1,7 +1,5 @@
 import React from 'react';
-import {
- Row, Col, List, Divider
-} from 'antd';
+import { Divider } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
@@ -20,7 +18,7 @@ const withLifecycle = lifecycle({
         WebAPI.getConversations(),
       ]);
 
-      this.props.loadUserList(responses[0])
+      this.props.loadUserList(responses[0]);
       this.props.loadConversations(responses[1]);
     } catch (error) {
       console.error(error);
@@ -32,13 +30,11 @@ const withLifecycle = lifecycle({
   componentWillUnmount() {}
 });
 
-const handleCreateNewConversation = props => async (userId) =>  {
-  const conversation = props.conversations.find(conversation =>
-    conversation.users.find(user => user.id == userId)
-  );
+const handleCreateNewConversation = props => async (userId) => {
+  const conversation = props.conversations.find(conversation => conversation.users.find(user => user.id == userId));
 
   if (conversation) {
-      props.selectConversation(conversation.id);
+    props.selectConversation(conversation.id);
   } else {
     try {
       props.showPageLoader();
@@ -49,7 +45,9 @@ const handleCreateNewConversation = props => async (userId) =>  {
       props.hidePageLoader();
     }
   }
-}
+};
+
+const handleLogoutClick = props => () =>  props.clearCredentials();
 
 const handleReceivedConversation = props => (response) => {
   const { conversation } = response;
@@ -69,7 +67,8 @@ const withConversationHandlers = withHandlers({
   handleReceivedConversation,
   handleReceivedMessage,
   handleSelectConversation,
-  handleCreateNewConversation
+  handleCreateNewConversation,
+  handleLogoutClick
 });
 
 const ConversationsComponent = props => (
@@ -87,10 +86,11 @@ const ConversationsComponent = props => (
           conversations={props.conversations}
           onSelect={props.handleSelectConversation}
           createConversation={props.handleCreateNewConversation}
+          handleLogoutClick={props.handleLogoutClick}
         />
       </div>
       <div className="col">
-        <Divider type="vertical" style={{ height: '100%' }}/>
+        <Divider type="vertical" style={{ height: '100%' }} />
       </div>
       <div className="col messages-list">
         <MessagesList conversation={props.conversation} user={props.user} />

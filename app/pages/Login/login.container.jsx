@@ -40,7 +40,6 @@ const onSubmitHandler = props => async (values) => {
 
     props.setCredentials(credentials);
     props.history.push('/');
-    window.reload();
   } catch (error) {
     props.setLoginError(error || { error: true });
   } finally {

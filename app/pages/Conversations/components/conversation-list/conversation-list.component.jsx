@@ -16,7 +16,7 @@ const ConversationList = (props) => {
 
   return (
     <div style={styles.container}>
-      <CurrentUserDisplay user={props.user} />
+      <CurrentUserDisplay user={props.user} handleLogoutClick={props.handleLogoutClick}/>
       <Divider />
       <NewConversationForm users={props.users} createConversation={props.createConversation} />
       {hasConversations && (

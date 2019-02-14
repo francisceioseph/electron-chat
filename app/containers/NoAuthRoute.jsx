@@ -14,8 +14,8 @@ const NoAuthRoute = ({ authenticated, ...props }) => (
     {authenticated ? (
       <Redirect
         to={{
-          pathname: '/prontuarios',
-          state: { from: props.location }
+          pathname : '/',
+          state    : { from: props.location }
         }}
       />
     ) : (

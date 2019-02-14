@@ -1,13 +1,10 @@
 import { loginDefaultState } from '../pages/Login/login.reducer';
 import AppConstants from '../constants';
 
-export const localStorageMiddleware = () => next => action => {
+export const localStorageMiddleware = () => next => (action) => {
   const result = next(action);
   if (action.type === 'SET_USER_CREDENTIALS') {
-    localStorage.setItem(
-      AppConstants.AUTH_TOKEN_STORAGE_ID,
-      JSON.stringify(action.payload)
-    );
+    localStorage.setItem(AppConstants.AUTH_TOKEN_STORAGE_ID, JSON.stringify(action.payload));
   }
 
   if (action.type === 'CLEAR_USER_CREDENTIALS') {

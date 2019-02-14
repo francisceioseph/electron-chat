@@ -6,7 +6,8 @@ import { Avatar, Button } from 'antd';
 import './user-item.component.less';
 
 type Props = {
-  user: Object
+  user: Object,
+  handleLogoutClick: Function
 };
 
 const UserItem = (props: Props) => {
@@ -19,7 +20,7 @@ const UserItem = (props: Props) => {
       </div>
       <div className="user-data">
         <h3>{user.profile.personal_datum.full_name}</h3>
-        <Button block size="small">
+        <Button block size="small" onClick={props.handleLogoutClick}>
           Sair
         </Button>
       </div>
