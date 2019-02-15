@@ -35,9 +35,12 @@ class NewMessageForm extends React.Component<Props, State> {
     return this.getUploads().length === 0 && !content;
   };
 
-  clearItems = () => {
+  removeItem = (index) => {
     const { form } = this.props;
-    form.resetFields(['uploads']);
+    const files = form.getFieldValue('uploads');
+
+    files.splice(index, 1);
+    form.setFieldsValue({ uploads: files });
   };
 
   handleSubmit = (e) => {
@@ -108,10 +111,10 @@ class NewMessageForm extends React.Component<Props, State> {
         </Form>
 
         <div className="upload-file-list">
-          {this.getUploads().map(file => (
+          {this.getUploads().map((file, index) => (
             <div className="list-item" key={file.name}>
               <p>{file.name}</p>
-              <Button icon="delete" size="small" onClick={() => this.clearItems()} />
+              <Button icon="delete" size="small" onClick={() => this.removeItem(index)} />
             </div>
           ))}
         </div>

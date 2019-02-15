@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 import './message-bubble.less';
 
 type Props = {
@@ -12,6 +12,8 @@ type Props = {
   // showTimestamp: boolean
 };
 
+moment.locale('pt-BR');
+
 export default function Message(props: Props) {
   const {
     data,
@@ -20,7 +22,9 @@ export default function Message(props: Props) {
     endsSequence // showTimestamp
   } = props;
 
-  // const friendlyTimestamp = moment(data.timestamp).format('LLLL');
+  const createdAt = moment(data.created_at);
+  const friendlyTimestamp = moment().diff(createdAt, 'days') > 0 ? createdAt.format('l LT') : createdAt.format('LT');
+
   return (
     <div
       className={[
@@ -30,16 +34,10 @@ export default function Message(props: Props) {
         `${endsSequence ? 'end' : ''}`
       ].join(' ')}
     >
-      {/* {
-          showTimestamp &&
-            <div className="timestamp">
-              { friendlyTimestamp }
-            </div>
-        } */}
-
       <div className="bubble-container">
         <div className="bubble" title="">
-          {data.content}
+          <p>{data.content}</p>
+          <small>{friendlyTimestamp}</small>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Empty, List, Avatar } from 'antd';
+import { Empty, List } from 'antd';
 
 import Header from '../../../../components/Header/header.component';
 import Message from '../message-bubble/message-bubble.component';
