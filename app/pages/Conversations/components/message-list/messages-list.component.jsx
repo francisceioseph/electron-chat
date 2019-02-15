@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Empty, List } from 'antd';
+import InfiniteScroll from 'react-infinite-scroller';
+import { Empty, List, Avatar } from 'antd';
 
 import Header from '../../../../components/Header/header.component';
 import Message from '../message-bubble/message-bubble.component';
@@ -51,28 +52,39 @@ const belongsToCurrentUser = (message, user) => message.user_id === user.id;
 const renderMessages = (conversation, messages, user) => (
   <div className="message-list-content">
     <Header title={getReceiver(conversation, user).profile.personal_datum.full_name} />
-    <List
-      style={{ flexGrow: 1 }}
-      dataSource={messages}
-      renderItem={(message, index) => {
-        const previous = messages[index - 1];
-        const next = messages[index + 1];
+    <div style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+      <InfiniteScroll
+        loader={<div className="loader" key={0}>Loading ...</div>}
+        initialLoad={false}
+        pageStart={0}
+        loadMore={() => {}}
+        hasMore={false}
+        useWindow={false}
+      >
+        <List
+          style={{ width: '99%' }}
+          dataSource={messages}
+          renderItem={(message, index) => {
+            const previous = messages[index - 1];
+            const next = messages[index + 1];
 
-        const messageStartsSequence = startSequence(previous, message);
-        const messageEndsSequence = endsSequence(next, message);
+            const messageStartsSequence = startSequence(previous, message);
+            const messageEndsSequence = endsSequence(next, message);
 
-        return (
-          <Message
-            key={message.id}
-            isMine={belongsToCurrentUser(message, user)}
-            startsSequence={messageStartsSequence}
-            endsSequence={messageEndsSequence}
-            showTimestamp={false}
-            data={message}
-          />
-        );
-      }}
-    />
+            return (
+              <Message
+                key={message.id}
+                isMine={belongsToCurrentUser(message, user)}
+                startsSequence={messageStartsSequence}
+                endsSequence={messageEndsSequence}
+                showTimestamp={false}
+                data={message}
+              />
+            );
+          }}
+        />
+      </InfiniteScroll>
+    </div>
   </div>
 );
 

@@ -52,7 +52,9 @@ class NewMessageForm extends React.Component<Props, State> {
         message.append('conversation_id', conversationId.toString());
         message.append('content', values.content);
 
-        values.uploads.forEach(file => message.append('attachments[]', file.originFileObj, file.name));
+        if (values.uploads) {
+          values.uploads.forEach(file => message.append('attachments[]', file.originFileObj, file.name));
+        }
 
         WebAPI.postMessage(message, { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(() => {
