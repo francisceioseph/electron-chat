@@ -47,8 +47,6 @@ class NewMessageForm extends React.Component<Props, State> {
 
     form.validateFields((err, values) => {
       if (!err) {
-        const { token } = getCredentials();
-
         const message = new FormData();
         message.append('user_id', user.id.toString());
         message.append('conversation_id', conversationId.toString());
