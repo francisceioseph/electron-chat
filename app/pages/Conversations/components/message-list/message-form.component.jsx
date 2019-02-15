@@ -48,7 +48,7 @@ class NewMessageForm extends React.Component<Props, State> {
 
     e.preventDefault();
 
-    form.validateFields((err, values) => {
+    form.validateFields(async (err, values) => {
       if (!err) {
         const message = new FormData();
         message.append('user_id', user.id.toString());
@@ -59,11 +59,16 @@ class NewMessageForm extends React.Component<Props, State> {
           values.uploads.forEach(file => message.append('attachments[]', file.originFileObj, file.name));
         }
 
-        WebAPI.postMessage(message, { headers: { 'Content-Type': 'multipart/form-data' } })
-          .then(() => {
-            form.resetFields();
-          })
-          .catch(error => console.log(error));
+        this.setState({ uploading: true });
+
+        try {
+          await WebAPI.postMessage(message, { headers: { 'Content-Type': 'multipart/form-data' } });
+          form.resetFields();
+        } catch (e) {
+          console.log(e);
+        } finally {
+          this.setState({ uploading: false });
+        }
       }
     });
   };
@@ -96,15 +101,15 @@ class NewMessageForm extends React.Component<Props, State> {
           </Form.Item>
           <Form.Item>
             {fileDecorator(
-              <Upload showUploadList={false} uploading={this.state.uploading} multiple>
+              <Upload loading={this.state.uploading} showUploadList={false} uploading={this.state.uploading} multiple>
                 <Button>
-                  <Icon type="upload" />
+                  <Icon type="file-add" />
                 </Button>
               </Upload>
             )}
           </Form.Item>
           <Form.Item>
-            <Button disabled={this.disableSendButton()} type="primary" htmlType="submit">
+            <Button loading={this.state.uploading} disabled={this.disableSendButton()} type="primary" htmlType="submit">
               Enviar
             </Button>
           </Form.Item>

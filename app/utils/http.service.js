@@ -6,6 +6,8 @@ import { clearCredentials } from '../pages/Login/login.actions';
 
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
+export const getResourceUrl = path => `${BASE_BACKEND_URL}${path}`;
+
 export const postLoginUrl = () => '/login';
 export const POST_USER_URL = '/signup';
 

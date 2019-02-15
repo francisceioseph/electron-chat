@@ -2,6 +2,9 @@
 
 import * as React from 'react';
 import * as moment from 'moment';
+
+import { getResourceUrl } from '../../../../utils/http.service';
+
 import './message-bubble.less';
 
 type Props = {
@@ -22,6 +25,8 @@ export default function Message(props: Props) {
     endsSequence // showTimestamp
   } = props;
 
+  const attachments = data.attachments || [];
+
   const createdAt = moment(data.created_at);
   const friendlyTimestamp = moment().diff(createdAt, 'days') > 0 ? createdAt.format('l LT') : createdAt.format('LT');
 
@@ -36,6 +41,9 @@ export default function Message(props: Props) {
     >
       <div className="bubble-container">
         <div className="bubble" title="">
+          {attachments.map(attachment => (
+            <p href={getResourceUrl(attachment.url)}>{attachment.filename}</p>
+          ))}
           <p>{data.content}</p>
           <small>{friendlyTimestamp}</small>
         </div>
