@@ -88,9 +88,9 @@ export const getRequest = async (path) => {
   return axios.get(URL);
 };
 
-export const postRequest = async (path, data) => {
+export const postRequest = async (path, data, options = {}) => {
   const URL = BASE_BACKEND_URL + path;
-  return axios.post(URL, data);
+  return axios.post(URL, data, options);
 };
 
 export const putRequest = async (path, data) => {

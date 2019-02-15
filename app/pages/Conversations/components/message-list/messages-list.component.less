@@ -39,10 +39,11 @@
 
 .new-message-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   .message-form {
     display: flex !important;
+    flex-direction: row;
     flex-grow: 1;
 
     .message-form-item {
@@ -62,6 +63,20 @@
             flex-grow: 1;
           }
         }
+      }
+    }
+  }
+
+  .upload-file-list {
+    padding: 8px;
+    
+    .list-item {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+  
+      button {
+        margin-left: 8px;
       }
     }
   }

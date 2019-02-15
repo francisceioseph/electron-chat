@@ -86,7 +86,7 @@ const MessagesList = ({ conversation, user }) => {
 
       {!hasMessages && (
         <div className="empty-container">
-          <Empty description="Ainda não há nenhuma mensagem" />
+          <Empty description="Nenhuma conversa selecionada" />
         </div>
       )}
       <MessageForm conversationId={conversation.id} user={user} />
