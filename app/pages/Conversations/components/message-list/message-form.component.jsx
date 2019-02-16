@@ -95,6 +95,15 @@ class NewMessageForm extends React.Component<Props, State> {
 
     return (
       <div className="new-message-form">
+        <div className="upload-file-list">
+          <h3>Anexos para envio</h3>
+          {this.getUploads().map((file, index) => (
+            <div className="list-item" key={file.name}>
+              <p>{file.name}</p>
+              <Button icon="delete" size="small" onClick={() => this.removeItem(index)} />
+            </div>
+          ))}
+        </div>
         <Form className="message-form" layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item className="message-form-item">
             {contentDecorator(<Input placeholder="Digite sua mensagem..." />)}
@@ -114,15 +123,6 @@ class NewMessageForm extends React.Component<Props, State> {
             </Button>
           </Form.Item>
         </Form>
-
-        <div className="upload-file-list">
-          {this.getUploads().map((file, index) => (
-            <div className="list-item" key={file.name}>
-              <p>{file.name}</p>
-              <Button icon="delete" size="small" onClick={() => this.removeItem(index)} />
-            </div>
-          ))}
-        </div>
       </div>
     );
   };

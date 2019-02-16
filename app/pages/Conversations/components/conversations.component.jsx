@@ -1,5 +1,4 @@
 import React from 'react';
-import { Divider } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
@@ -13,10 +12,7 @@ const withLifecycle = lifecycle({
   async componentDidMount() {
     try {
       this.props.showPageLoader();
-      const responses = await Promise.all([
-        WebAPI.getChatUsers(),
-        WebAPI.getConversations(),
-      ]);
+      const responses = await Promise.all([WebAPI.getChatUsers(), WebAPI.getConversations()]);
 
       this.props.loadUserList(responses[0]);
       this.props.loadConversations(responses[1]);
@@ -47,7 +43,7 @@ const handleCreateNewConversation = props => async (userId) => {
   }
 };
 
-const handleLogoutClick = props => () =>  props.clearCredentials();
+const handleLogoutClick = props => () => props.clearCredentials();
 
 const handleReceivedConversation = props => (response) => {
   const { conversation } = response;
@@ -88,9 +84,6 @@ const ConversationsComponent = props => (
           createConversation={props.handleCreateNewConversation}
           handleLogoutClick={props.handleLogoutClick}
         />
-      </div>
-      <div className="col">
-        <Divider type="vertical" style={{ height: '100%' }} />
       </div>
       <div className="col messages-list">
         <MessagesList conversation={props.conversation} user={props.user} />

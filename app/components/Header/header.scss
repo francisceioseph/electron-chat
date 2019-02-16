@@ -43,10 +43,15 @@
   height: 56px;
   z-index: 9;
   background-color: #fff;
-  position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  position: relative;
+
+  h1 {
+    color: #54577c;
+  }
 
   .rightWrapper {
     display: flex;
@@ -56,7 +61,6 @@
   .leftWrapper {
     display: flex;
     h3 {
-
     }
   }
 
