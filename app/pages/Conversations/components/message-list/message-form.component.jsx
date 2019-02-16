@@ -6,6 +6,7 @@ import {
   Form, Input, Button, Upload, Icon
 } from 'antd';
 
+import { UploadsList } from '../uploads-list';
 import * as WebAPI from '../../../../utils/api.service';
 
 type Props = {
@@ -93,17 +94,11 @@ class NewMessageForm extends React.Component<Props, State> {
       getValueFromEvent : this.normFile
     });
 
+    const uploads = this.getUploads();
+
     return (
       <div className="new-message-form">
-        <div className="upload-file-list">
-          <h3>Anexos para envio</h3>
-          {this.getUploads().map((file, index) => (
-            <div className="list-item" key={file.name}>
-              <p>{file.name}</p>
-              <Button icon="delete" size="small" onClick={() => this.removeItem(index)} />
-            </div>
-          ))}
-        </div>
+        <UploadsList uploads={uploads} removeItem={this.removeItem} />
         <Form className="message-form" layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item className="message-form-item">
             {contentDecorator(<Input placeholder="Digite sua mensagem..." />)}

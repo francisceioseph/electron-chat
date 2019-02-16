@@ -52,9 +52,13 @@ const belongsToCurrentUser = (message, user) => message.user_id === user.id;
 const renderMessages = (conversation, messages, user) => (
   <div className="message-list-content">
     <Header title={getReceiver(conversation, user).profile.personal_datum.full_name} />
-    <div style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+    <div style={{ overflowY: 'auto', overflowX: 'hidden', maxHeight: '89vh' }}>
       <InfiniteScroll
-        loader={<div className="loader" key={0}>Loading ...</div>}
+        loader={(
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        )}
         initialLoad={false}
         pageStart={0}
         loadMore={() => {}}
@@ -64,6 +68,7 @@ const renderMessages = (conversation, messages, user) => (
         <List
           style={{ width: '99%' }}
           dataSource={messages}
+          rowKey={message => `${message.id}`}
           renderItem={(message, index) => {
             const previous = messages[index - 1];
             const next = messages[index + 1];
@@ -73,7 +78,6 @@ const renderMessages = (conversation, messages, user) => (
 
             return (
               <Message
-                key={message.id}
                 isMine={belongsToCurrentUser(message, user)}
                 startsSequence={messageStartsSequence}
                 endsSequence={messageEndsSequence}

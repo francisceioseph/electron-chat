@@ -41,8 +41,10 @@ export default function Message(props: Props) {
     >
       <div className="bubble-container">
         <div className="bubble" title="">
-          {attachments.map(attachment => (
-            <p href={getResourceUrl(attachment.url)}>{attachment.filename}</p>
+          {attachments.map((attachment, index) => (
+            <p key={`${attachment.filename}_${index}`} href={getResourceUrl(attachment.url)}>
+              {attachment.filename}
+            </p>
           ))}
           <p>{data.content}</p>
           <small>{friendlyTimestamp}</small>
