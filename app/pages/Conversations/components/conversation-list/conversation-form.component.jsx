@@ -1,10 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import deburr from 'lodash/deburr'
+import deburr from 'lodash/deburr';
 
 import { AutoComplete } from 'antd';
-import { compose, withHandlers, withState, lifecycle } from 'recompose';
+import {
+  compose, withHandlers, withState, lifecycle
+} from 'recompose';
 
 import * as WebAPI from '../../../../utils/api.service';
 
@@ -24,8 +26,8 @@ type Props = {
 
 const styles = {
   autocomplete: {
-    width: '100%',
-    marginBottom: '8px'
+    width        : '100%',
+    marginBottom : '8px'
   }
 };
 
@@ -39,11 +41,11 @@ const handleOnSearch = (props: Props) => (value: string) => {
   const filteredUsers = !value
     ? users
     : users.filter((user) => {
-        const searchText = deburr(value.toLowerCase());
-        const userName = deburr(user.full_name.toLowerCase());
+      const searchText = deburr(value.toLowerCase());
+      const userName = deburr(user.full_name.toLowerCase());
 
-        return userName.indexOf(searchText) >= 0;
-      });
+      return userName.indexOf(searchText) >= 0;
+    });
 
   props.setUserList(filteredUsers);
 };
@@ -63,15 +65,12 @@ const withLifecycle = lifecycle({
 
 const NewConversationForm = (props: Props) => (
   <div>
-    <AutoComplete
-      style={styles.autocomplete}
-      onSelect={props.handleOnSelect}
-      onSearch={props.handleOnSearch}>
+    <AutoComplete style={styles.autocomplete} onSelect={props.handleOnSelect} onSearch={props.handleOnSearch}>
       {props.userList.map(user => (
         <AutoComplete.Option key={`${user.id}`} value={user.id.toString()}>
           {user.full_name}
-        </AutoComplete.Option>))
-      }
+        </AutoComplete.Option>
+      ))}
     </AutoComplete>
   </div>
 );

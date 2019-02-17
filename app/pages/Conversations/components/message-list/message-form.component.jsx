@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import {
-  Form, Input, Button, Upload, Icon
+  Form, Input, Button, Upload, Icon, Tooltip
 } from 'antd';
 
 import { UploadsList } from '../uploads-list';
@@ -106,9 +106,11 @@ class NewMessageForm extends React.Component<Props, State> {
           <Form.Item>
             {fileDecorator(
               <Upload loading={this.state.uploading} showUploadList={false} uploading={this.state.uploading} multiple>
-                <Button>
-                  <Icon type="file-add" />
-                </Button>
+                <Tooltip title="Anexar Arquivos">
+                  <Button>
+                    <Icon type="file-add" />
+                  </Button>
+                </Tooltip>
               </Upload>
             )}
           </Form.Item>
