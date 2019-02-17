@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import * as moment from 'moment';
+import FileSaver from 'file-saver';
 
 import { getResourceUrl } from '../../../../utils/http.service';
 
@@ -17,6 +18,15 @@ type Props = {
 
 moment.locale('pt-BR');
 
+const saveFile = (event, attachment) => {
+  event.preventDefault();
+
+  const url = getResourceUrl(attachment.url);
+  const { filename } = attachment;
+
+  FileSaver.saveAs(url, filename);
+};
+
 export default function Message(props: Props) {
   const {
     data,
@@ -29,7 +39,6 @@ export default function Message(props: Props) {
 
   const createdAt = moment(data.created_at);
   const friendlyTimestamp = moment().diff(createdAt, 'days') > 0 ? createdAt.format('l LT') : createdAt.format('LT');
-
   return (
     <div
       className={[
@@ -42,9 +51,14 @@ export default function Message(props: Props) {
       <div className="bubble-container">
         <div className="bubble" title="">
           {attachments.map((attachment, index) => (
-            <p key={`${attachment.filename}_${index}`} href={getResourceUrl(attachment.url)}>
+            <a
+              heref="#"
+              role="button"
+              key={`${attachment.filename}_${index}`}
+              onClick={event => saveFile(event, attachment)}
+            >
               {attachment.filename}
-            </p>
+            </a>
           ))}
           <p>{data.content}</p>
           <small>{friendlyTimestamp}</small>
