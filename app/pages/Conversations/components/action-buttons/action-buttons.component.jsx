@@ -12,12 +12,12 @@ const ButtonGroup = Button.Group;
 const ActionButtons = (props: Props) => (
   <div>
     <ButtonGroup>
-      <Tooltip title="Nova Conversa">
+      {/* <Tooltip title="Nova Conversa">
         <Button icon="user-add" />
-      </Tooltip>
+      </Tooltip> */}
 
       <Tooltip title="Sair">
-        <Button icon="logout" onClick={props.handleLogoutClick} />
+        <Button icon="logout" onClick={props.handleLogoutClick}>Sair</Button>
       </Tooltip>
     </ButtonGroup>
   </div>

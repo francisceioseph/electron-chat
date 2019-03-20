@@ -19,6 +19,7 @@ const UserItem = (props: Props) => {
       </div>
       <div className="user-data">
         <h3>{user.profile.personal_datum.full_name}</h3>
+        <p className="subtitle">{user.email}</p>
       </div>
     </div>
   );

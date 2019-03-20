@@ -105,7 +105,7 @@ const MessagesList = ({ conversation, user }) => {
           <Empty description="Nenhuma conversa selecionada" />
         </div>
       )}
-      <MessageForm conversationId={conversation.id} user={user} />
+      {conversation.id && <MessageForm conversationId={conversation.id} user={user} />}
     </div>
   );
 };

@@ -54,7 +54,7 @@ class NewMessageForm extends React.Component<Props, State> {
         const message = new FormData();
         message.append('user_id', user.id.toString());
         message.append('conversation_id', conversationId.toString());
-        message.append('content', values.content);
+        message.append('content', values.content || "");
 
         if (values.uploads) {
           values.uploads.forEach(file => message.append('attachments[]', file.originFileObj, file.name));
@@ -86,7 +86,7 @@ class NewMessageForm extends React.Component<Props, State> {
 
     const { getFieldDecorator } = form;
     const contentDecorator = getFieldDecorator('content', {
-      rules: [{ required: true, message: 'Digite uma mensagem' }]
+      rules: [{ required: false, message: 'Digite uma mensagem', initialValue:"" }]
     });
 
     const fileDecorator = getFieldDecorator('uploads', {

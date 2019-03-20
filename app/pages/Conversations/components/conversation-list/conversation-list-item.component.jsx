@@ -14,7 +14,19 @@ const makeInitials = (name) => {
 };
 
 const getLastMessageContent = (messages) => {
-  const lastMessage = messages[messages.length - 1] || { content: '' };
+  const lastMessage = messages[messages.length - 1] || { content: '', attachments: []};
+  const content = lastMessage.content || '';
+  const attachments = lastMessage.attachments || [];
+
+  if (content) {
+    return content;
+  } else if (attachments.length >= 1) {
+    const fileToken = attachments.length > 1 ? 'arquivos' : 'arquivo';
+    return `${attachments.length} ${fileToken} em anexo`;
+  } else {
+    return "";
+  }
+
   return lastMessage.content;
 };
 

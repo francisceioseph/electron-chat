@@ -64,8 +64,14 @@ const withLifecycle = lifecycle({
 });
 
 const NewConversationForm = (props: Props) => (
-  <div>
-    <AutoComplete style={styles.autocomplete} onSelect={props.handleOnSelect} onSearch={props.handleOnSearch}>
+  <div className="conversation-form">
+    <label>Nova Conversa</label>
+    <AutoComplete 
+      style={styles.autocomplete} 
+      onSelect={props.handleOnSelect} 
+      onSearch={props.handleOnSearch}
+      placeholder="Nome do Usuário"
+      >
       {props.userList.map(user => (
         <AutoComplete.Option key={`${user.id}`} value={user.id.toString()}>
           {user.full_name}
