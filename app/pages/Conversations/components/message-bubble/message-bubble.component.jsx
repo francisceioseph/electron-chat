@@ -3,6 +3,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import FileSaver from 'file-saver';
+import { Icon } from 'antd';
 
 import { getResourceUrl } from '../../../../utils/http.service';
 
@@ -57,6 +58,7 @@ export default function Message(props: Props) {
               key={`${attachment.filename}_${index}`}
               onClick={event => saveFile(event, attachment)}
             >
+              <Icon type="file" style={{marginRight: 8}}/>
               {attachment.filename}
             </a>
           ))}

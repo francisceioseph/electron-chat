@@ -1,15 +1,21 @@
 .conversation-list-container {
   padding-top: 24px;
-  padding-right: 16px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: stretch;
   height: 98vh;
-
+  width: 20vw;
+  min-width: 250px;
+  
   .conversation-list {
     flex-grow: 1;
+    width: 100%;
+
+    .selected {
+      background: #019d9d30;
+      border-radius: 4px;
+    }
   }
 }
 

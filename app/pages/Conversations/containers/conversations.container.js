@@ -18,7 +18,7 @@ const mapStateToProps = ({ conversations, login }) => ({
   conversations : _.values(conversations.conversations),
   users         : _.values(conversations.users),
   conversation  : conversations.currentConversation,
-  user          : t(login, 'credentials.user').safeObject || {}
+  user          : t(login, 'credentials.user').safeObject || {}, 
 });
 
 const mapDispatchToProps = {

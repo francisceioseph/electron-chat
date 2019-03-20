@@ -17,7 +17,7 @@ const withLifecycle = lifecycle({
       this.props.loadUserList(responses[0]);
       this.props.loadConversations(responses[1]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     } finally {
       this.props.hidePageLoader();
     }
@@ -34,7 +34,10 @@ const handleCreateNewConversation = props => async (userId) => {
   } else {
     try {
       props.showPageLoader();
-      await WebAPI.postNewConversation({ receiver_id: userId });
+      const response = await WebAPI.postNewConversation({ receiver_id: userId });
+      const { data: conversation } = response;
+      
+      props.addConversation(conversation);
     } catch (e) {
       console.log(e);
     } finally {
@@ -46,8 +49,6 @@ const handleCreateNewConversation = props => async (userId) => {
 const handleLogoutClick = props => () => props.clearCredentials();
 
 const handleReceivedConversation = props => (response) => {
-  const { conversation } = response;
-  props.addConversation(conversation);
 };
 
 const handleReceivedMessage = props => (response) => {
@@ -80,6 +81,7 @@ const ConversationsComponent = props => (
           user={props.user}
           users={props.users}
           conversations={props.conversations}
+          currentConversation={props.conversation}
           onSelect={props.handleSelectConversation}
           createConversation={props.handleCreateNewConversation}
           handleLogoutClick={props.handleLogoutClick}

@@ -12,6 +12,7 @@ import './conversation-list.less';
 
 type Props = {
   conversations: Array<Object>,
+  currentConversation: Object,
   user: Object,
   users: Array<Object>,
   onSelect: Function,
@@ -35,6 +36,7 @@ const ConversationList = (props: Props) => {
             rowKey={conversation => `${conversation.id}`}
             renderItem={conversation => (
               <ConversationListItem
+                currentConversation={props.currentConversation}
                 conversation={conversation}
                 onSelect={() => props.onSelect(conversation.id)}
                 user={props.user}

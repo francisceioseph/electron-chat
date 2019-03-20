@@ -36,9 +36,12 @@ const ConversationListItem = (props) => {
   const receiverName = t(receiver, 'profile.personal_datum.full_name').safeString;
 
   return (
-    <List.Item onClick={onSelect} style={{ cursor: 'pointer' }}>
+    <List.Item 
+      className={`${props.currentConversation.id == conversation.id ? 'selected' : ''}`} 
+      onClick={onSelect} 
+      style={{ cursor: 'pointer' }}>
       <List.Item.Meta
-        avatar={<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>{makeInitials(receiverName)}</Avatar>}
+        avatar={<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginLeft: 8 }}>{makeInitials(receiverName)}</Avatar>}
         title={<strong>{receiverName}</strong>}
         description={getLastMessageContent(conversation.messages)}
       />
