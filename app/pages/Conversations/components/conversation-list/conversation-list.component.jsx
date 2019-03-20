@@ -26,7 +26,7 @@ const ConversationList = (props: Props) => {
     <div className="conversation-list-container">
       <CurrentUserDisplay user={props.user} />
       <Divider />
-      <NewConversationForm users={props.users} createConversation={props.createConversation} />
+      <NewConversationForm user={props.user} users={props.users} createConversation={props.createConversation} />
       {hasConversations && (
         <div className="conversation-list">
           <List

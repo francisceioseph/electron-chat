@@ -16,6 +16,7 @@ type User = {
 };
 
 type Props = {
+  user: User,
   users: Array<User>,
   userList: Array<User>,
   handleOnSelect: Function,
@@ -59,7 +60,7 @@ const withUserListState = withState('userList', 'setUserList', []);
 
 const withLifecycle = lifecycle({
   componentDidMount() {
-    this.props.setUserList(this.props.users);
+    this.props.setUserList(this.props.users.filter(user => user.id != this.props.user.id));
   }
 });
 
