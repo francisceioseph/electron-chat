@@ -52,7 +52,8 @@ const handleAddConversation = (state, action) => {
 
   return {
     ...state,
-    conversations
+    conversations,
+    currentConversation: conversation
   };
 };
 
