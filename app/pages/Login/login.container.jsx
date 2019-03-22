@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
-import { Alert } from 'antd';
+import { Alert, Button } from 'antd';
 
 import { setCredentials, setLoginError } from './login.actions';
 import { showPageLoader, hidePageLoader } from '../../containers/layouts/actions';
@@ -58,6 +59,13 @@ const LoginContainer = props => (
         <span>Login</span>
       </div>
       <LoginForm onSubmitHandler={props.onSubmitHandler} />
+      <div className="footer">
+        <p>ou</p>
+      </div>
+      <Button className="login-form-button">
+        <Link to="/register">Inscrever-se</Link>
+      </Button>
+
       {!!props.loginError && <Alert type="error" message="Login failed. Check yor your username/password" banner />}
     </div>
   </React.Fragment>

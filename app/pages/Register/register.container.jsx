@@ -57,7 +57,7 @@ const RegisterContainer = props => (
   <React.Fragment>
     <div className="form">
       <div className="logo">
-        <span>Cadastrar Usuário</span>
+        <span>Novo Usuário</span>
       </div>
       <RegisterForm onSubmitHandler={props.onSubmitHandler} />
 

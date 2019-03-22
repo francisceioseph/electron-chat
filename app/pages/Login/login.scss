@@ -45,3 +45,14 @@
     font-weight: 700;
   }
 }
+
+.footer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  p {
+    color: grey;
+  }
+}

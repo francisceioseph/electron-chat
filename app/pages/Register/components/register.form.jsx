@@ -14,24 +14,16 @@ const handleSubmit = props => e => {
   });
 };
 
-const checkPassword = props => (rule, value, callback) => {
+const checkConfirm = props => (rule, value, callback) => {
   const form = props.form;
-  if (value && value !== form.getFieldValue('password')) {
-    callback('Two passwords that you enter is inconsistent!');
+  if (!value || value !== form.getFieldValue('password')) {
+    callback('As senhas fornecidas são inconsistentes!');
   } else {
     callback();
   }
 }
 
-const checkConfirm = props => (rule, value, callback) => {
-  const form = props.form;
-  if (value) {
-    form.validateFields(['confirm'], { force: true });
-  }
-  callback();
-}
-
-const withFormHandlers = withHandlers({ handleSubmit, checkPassword, checkConfirm });
+const withFormHandlers = withHandlers({ handleSubmit, checkConfirm });
 
 const LoginForm = props => {
   const { getFieldDecorator } = props.form;
@@ -58,9 +50,9 @@ const LoginForm = props => {
             />
           )}
         </FormItem>
-        <FormItem>
+        <FormItem hasFeedback>
           {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Senha não pode estar em branco' }, { validator: props.checkPassword }]
+            rules: [{ required: true, message: 'Senha não pode estar em branco' }]
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -69,10 +61,11 @@ const LoginForm = props => {
             />
           )}
         </FormItem>
-        <FormItem>
+        <FormItem hasFeedback>
           {getFieldDecorator('password_confirmation', {
             rules: [
-              { required: true, message: 'Confirmação de senha não pode estar em branco' },
+              { 
+                required: true, message: 'Confirmação de senha não pode estar em branco' },
               { validator: props.checkConfirm },
             ],
           })(
@@ -85,7 +78,7 @@ const LoginForm = props => {
         </FormItem>
 
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Cadastrar
+          Registrar
         </Button>
       </Form>
     </div>
