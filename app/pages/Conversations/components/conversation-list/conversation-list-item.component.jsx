@@ -5,12 +5,14 @@ import t from 'typy';
 import { List, Avatar } from 'antd';
 
 const makeInitials = (name) => {
-  const tokens = name.split(' ');
+  const tokens = name.split(' ').filter(it => !!it);
 
   const firstLetter = tokens[0][0];
-  const sencondLetter = tokens.length > 0 ? tokens[tokens.length - 1][0] : tokens[0][1];
+  const sencondLetter = tokens.length > 1 ? tokens[tokens.length - 1][0] : tokens[0][1];
 
-  return firstLetter + sencondLetter;
+  console.log(tokens);
+
+  return `${firstLetter}${sencondLetter}`;
 };
 
 const getLastMessageContent = (messages) => {
