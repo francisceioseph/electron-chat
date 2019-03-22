@@ -8,6 +8,7 @@ import {
   compose, withHandlers, withState, lifecycle
 } from 'recompose';
 
+import SugestSelector from '../../../../components/SugestSelector';
 import * as WebAPI from '../../../../utils/api.service';
 
 type User = {
@@ -36,24 +37,8 @@ const handleOnSelect = (props: Props) => async (value: string) => {
   props.createConversation(parseInt(value));
 };
 
-const handleOnSearch = (props: Props) => (value: string) => {
-  const { users } = props;
-
-  const filteredUsers = !value
-    ? users
-    : users.filter((user) => {
-      const searchText = deburr(value.toLowerCase());
-      const userName = deburr(user.full_name.toLowerCase());
-
-      return userName.indexOf(searchText) >= 0;
-    });
-
-  props.setUserList(filteredUsers);
-};
-
 const withFormHandlers = withHandlers({
   handleOnSelect,
-  handleOnSearch
 });
 
 const withUserListState = withState('userList', 'setUserList', []);
@@ -67,18 +52,16 @@ const withLifecycle = lifecycle({
 const NewConversationForm = (props: Props) => (
   <div className="conversation-form">
     <label>Nova Conversa</label>
-    <AutoComplete 
+
+    <SugestSelector 
       style={styles.autocomplete} 
       onSelect={props.handleOnSelect} 
-      onSearch={props.handleOnSearch}
-      placeholder="Nome do Usuário"
-      >
-      {props.userList.map(user => (
-        <AutoComplete.Option key={`${user.id}`} value={user.id.toString()}>
-          {user.full_name}
-        </AutoComplete.Option>
-      ))}
-    </AutoComplete>
+      options={props.userList}
+      valueName="id"
+      labelName="full_name" 
+      idName="id"
+      placeholder="Selecione um usuário"
+      />
   </div>
 );
 

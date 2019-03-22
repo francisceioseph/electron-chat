@@ -10,8 +10,6 @@ const makeInitials = (name) => {
   const firstLetter = tokens[0][0];
   const sencondLetter = tokens.length > 1 ? tokens[tokens.length - 1][0] : tokens[0][1];
 
-  console.log(tokens);
-
   return `${firstLetter}${sencondLetter}`;
 };
 
